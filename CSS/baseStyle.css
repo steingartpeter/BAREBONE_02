@@ -1,0 +1,188 @@
+body{
+    background: linear-gradient(#CDCDCD, #050505);
+}
+@media (min-width:1200px){.container{
+	width:1170px;
+	}
+}
+div.container{
+    margin-bottom: 10px;
+    /*width:85%;*/
+}
+div.wide{
+    margin-bottom: 10px;
+    width:85%;
+}
+div.row{
+    padding:10px;
+    margin-bottom: 12px;
+}
+div.col-margin{
+    border:1px #EFEFEF solid;
+    border-radius:10px;
+    min-height: 300px;
+    background: linear-gradient(#AFBCE6,#F0F0F5);
+    box-shadow: 10px 10px 10px #050505;
+    padding:15px;
+}
+
+
+p.bg-danger{
+    color:crimson;
+    padding-bottom:5px;
+}
+p.bg-danger:hover{
+	background-color:#e8b3b4;
+    color:red;
+    font-weight: 700;
+    padding-bottom:5px;
+}
+p.bg-success{
+    color:olive;
+    padding-bottom:5px;
+}
+p.bg-success:hover{
+    background-color:olivedrab;
+	color:#050505;
+    font-weight: 700;
+    padding-bottom:5px;
+}
+p.bg-warning{
+    background-color: burlywood;
+    color:chocolate;
+    padding-bottom:5px;
+}
+p.bg-warning:hover{
+    background-color:#944E03;
+    color: burlywood;
+    font-weight: 700;
+    padding-bottom:5px;
+}
+p.bg-primary{
+    color:aquamarine;
+    padding-bottom:5px;
+}
+p.bg-primary:hover{
+    color:dodgerblue;
+    background-color: aquamarine;
+    padding-bottom:5px;
+}
+p.bg-info{
+	padding-bottom:5px;
+}
+p.bg-info:hover, div.bg-info:hover{
+	background-color:#8DD7FA;
+	color:#0505FF;
+	padding-bottom:5px;
+	margin-bottom:5px;
+	box-shadow:2px 2px 4px #050505;
+}
+bg-info li{
+	padding-bottom:5px;
+}
+bg-info li:hover{
+	background-color:#8DD7FA;
+	color:#0505FF;
+	padding-bottom:5px;
+}
+
+.devMsg{
+	background-color: #252525;
+	color:#EFEFEF;
+	font-family:consolas;
+	padding:5px;
+	border:6px solid #FFBF11;
+	box-shadow:3px 3px 6px #353535;
+}
+
+div.footer{
+	min-height:40px;
+	text-align:center;
+	padding-top:16px;
+	border:1px #CDCDCD solid;
+	border-left:none;
+	border-bottom:none;
+	border-radius:8px;
+	box-shadow:-2px 2px 5px #7A7A7A;
+}
+
+
+
+img.std-img{
+	margin-left:auto;
+	margin-right:auto;
+	border:#FFFFFF solid 3px;
+	box-shadow:6px 6px 12px #050505;
+}
+
+span.kiemelt{
+	font-weight:bold;
+	font-color:#050505;
+	font-size:18px;
+	background-color:#CDCDCD;
+	border:1px #FF0505 dotted;
+}
+/*
++----------------------------------------------------------------------------------------------+
+|**********************************************************************************************|
+|*************                   MODÁLIS ABLAKOK, TOOLTIPEK                    ****************|
+|**********************************************************************************************|
++----------------------------------------------------------------------------------------------+
+*/
+div#bsc-toolTip{
+	position:absolute;
+	text-align:left;
+	width:150px;
+	height:50px;
+	padding:2px;
+	padding-top:8px;
+	padding-left:8px;
+	font-size:14px;
+	font-family: "Tahoma";
+	background-color: lightsteelblue;
+	border: 2px solid #EFEFEF;
+	border-radius:8px;
+	pointer-events:none;
+	box-shadow:3px 3px 6px #050505;
+	display:none;
+}
+
+/* ------------------------    MODAL   ----------------------------------- */
+.modal-base{
+	background: linear-gradient(to bottom, rgba(100,100,100, 0.8) 0%,
+		rgba(225,225,225, 0.5) 100%) !important;
+}
+.modal-base.danger-mod{
+	background: linear-gradient(to bottom, rgba(255,15,15, 0.8) 0%,
+		rgba(255, 225, 225, 0.5) 100%) !important;
+}
+/* ------------------------    MODAL - WARN ------------------------------ */
+.modal-base.warning-mod{
+	background: linear-gradient(to bottom,  rgba(255,190,0, 0.8) 0%,
+		rgba(255, 225, 150, 0.5) 100%) !important;
+}
+/* ------------------------    MODAL - SUCC ------------------------------ */
+.modal-base.everok-mod{
+	background: linear-gradient(to bottom,  rgba(15,255,15, 0.8) 0%,
+		rgba(230, 255, 230, 0.5) 100%) !important;
+}
+/* ------------------------    MODAL - INFO ------------------------------ */
+.modal-base.info-mod{
+	background: linear-gradient(to bottom,  rgba(15,150,255, 0.8) 0%,
+		rgba(200, 220, 200, 0.5) 100%) !important;
+	color:#2525FF;
+}
+div.info-mod > div.ui-widget-header{
+	border:#AAFFFF 1px solid;
+	background:linear-gradient(to bottom,  rgba(15,150,255, 0.8) 0%,
+		rgba(150,180,200, 0.5) 100%) !important;
+	color:#2525AA !important;
+}
+div.info-mod > span.ui-dialog-title{
+	background-color:linear-gradient(to bottom,  rgba(15,150,255, 0.8) 0%,
+		rgba(230, 255, 230, 0.5) 100%) !important;
+}
+div.info-mod > div.ui-dialog-buttonpane{
+	background:linear-gradient(to bottom,  rgba(230,255,230, 0.8) 0%,
+		rgba(15,150,255, 0.5) 100%) !important;
+}

@@ -28,14 +28,16 @@ div.col-margin{
 
 
 p.bg-danger{
-    color:crimson;
+    color:#FF9999;
     padding-bottom:5px;
 }
 p.bg-danger:hover{
-	background-color:#e8b3b4;
-    color:red;
+	background-color:#f0cece;
+    color:rgb(53, 7, 7);
     font-weight: 700;
-    padding-bottom:5px;
+	padding-bottom:5px;
+	box-shadow:2px 2px 4px #050505;
+	
 }
 p.bg-success{
     color:olive;
@@ -45,42 +47,45 @@ p.bg-success:hover{
     background-color:olivedrab;
 	color:#050505;
     font-weight: 700;
-    padding-bottom:5px;
+	padding-bottom:5px;
+	box-shadow:2px 2px 4px #050505;
 }
 p.bg-warning{
-    background-color: burlywood;
+    background-color: burlywood !important;
     color:chocolate;
     padding-bottom:5px;
 }
 p.bg-warning:hover{
-    background-color:#944E03;
-    color: burlywood;
+    background-color:#2b1702;
+    color: rgb(250, 232, 209);
     font-weight: 700;
-    padding-bottom:5px;
+	padding-bottom:5px;
+	box-shadow:2px 2px 4px #050505;
 }
 p.bg-primary{
     color:aquamarine;
     padding-bottom:5px;
 }
 p.bg-primary:hover{
-    color:dodgerblue;
-    background-color: aquamarine;
-    padding-bottom:5px;
-}
-p.bg-info{
+    color:#5555FF;
+    background-color: aquamarine !important;
 	padding-bottom:5px;
+	box-shadow:2px 2px 4px #050505;
 }
-p.bg-info:hover, div.bg-info:hover{
-	background-color:#8DD7FA;
+.bg-info{
+	padding-bottom:5px !important;
+}
+.bg-info:hover, div.bg-info:hover{
+	background-color:#8DD7FA !important;;
 	color:#0505FF;
 	padding-bottom:5px;
 	margin-bottom:5px;
 	box-shadow:2px 2px 4px #050505;
 }
-bg-info li{
+.bg-info li{
 	padding-bottom:5px;
 }
-bg-info li:hover{
+.bg-info li:hover{
 	background-color:#8DD7FA;
 	color:#0505FF;
 	padding-bottom:5px;

@@ -123,7 +123,7 @@
                     <button id="lginCncl" class="btn btn-danger"> Mégsem </button>
                 </div>
                 <div class="form-group">
-                    <p class="text-muted">Nincs még felhasználói profilja => <a href="/WERKFLOW/PHP/PUBLIC/USR_MNGMNT/creatRegReq.php">REGISZTRÁCIÓ</a></p>
+                    <p class="text-muted">Nincs még felhasználói profilja => <a href="creatRegReq.php">REGISZTRÁCIÓ</a></p>
                 </div>
                 </form>
                 

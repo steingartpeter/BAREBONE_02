@@ -168,7 +168,7 @@ class MAIN_APP{
         <link rel="stylesheet" href="/BAREBONE_02/CSS/baseStyle.css" >
     
         <!-- FAVICON -->
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/BAREBONE_02/favicon.ico" type="image/x-icon"/>
     
         <title>Boilerplate lap</title>
         </head/>';

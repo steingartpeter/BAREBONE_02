@@ -9,6 +9,9 @@ div.container{
     margin-bottom: 10px;
     /*width:85%;*/
 }
+.hgh600{
+    min-height: 600px;
+}
 div.wide{
     margin-bottom: 10px;
     width:85%;
@@ -25,7 +28,10 @@ div.col-margin{
     box-shadow: 10px 10px 10px #050505;
     padding:15px;
 }
-
+.nav-logo{
+	max-width:32px;
+	max-height:32px;
+}
 
 p.bg-danger{
     color:#FF9999;
@@ -40,7 +46,7 @@ p.bg-danger:hover{
 	
 }
 p.bg-success{
-    color:olive;
+    color:rgb(255, 255, 97);
     padding-bottom:5px;
 }
 p.bg-success:hover{

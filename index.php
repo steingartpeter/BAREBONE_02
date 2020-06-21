@@ -33,6 +33,7 @@
 
     $html .= '<div class="container hgh600"><div class="row"><div class="col-md-12">
     <h1>SITE IS UNDER CONSTRUCTION...</h1>
+    <p class="bg-info">APPID:'.$pgGnrtr->getAppId().'</p>
     </div></div></div>';
 
     echo $html;

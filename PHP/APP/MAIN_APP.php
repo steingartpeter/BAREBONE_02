@@ -21,18 +21,31 @@
 //-×
 //-×
 //</M>
+
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 session_start();
+
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/BAREBONE_02/PHP/APP/PHP_CONSTS.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/BAREBONE_02/PHP/APP/DB_HANDLER.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/BAREBONE_02/PHP/MAILER/PHPMailer/src/PHPMailer.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/BAREBONE_02/PHP/MAILER/PHPMailer/src/Exception.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/BAREBONE_02/PHP/tc_pdf/tcpdf.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
 
 class MAIN_APP{
 
     private $instncID = "";
     private $DB_HLR;
+    private $mailer;
 
     public function __construct(){
         //echo 'BASIC CONSTRUCTOR DONE...';
         //$this->DB_HLR = new DB_HANDLER();
+        $this->genrt_AppID();
+        $this->mailer = $this->mail_setup();
     }
 
 
@@ -41,6 +54,24 @@ class MAIN_APP{
     //|¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤        PUBLIC SECTION         ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤|
     //|××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××|
     //+------------------------------------------------------------------------------+
+
+    public function getAppId(){
+      //<SF>
+      //LÉTREHOZVA: 2020-06-21 <br/>
+      //SZERZÓ: AX07057 <br/>
+      // There is no special function, this only shows that constructor runs without a glitch. <br/>
+      // PARAMÉTEREK:
+      //×-
+      // @-- @param = ... -@
+      //-×
+      //MÓDOSTÁSOK:
+      //×-
+      // @-- ... -@
+      //-×
+      //</SF>
+
+      return $this->instncID;
+    }
 
     public function chck_user_pwd($u, $p){
         //<SF>
@@ -320,6 +351,55 @@ class MAIN_APP{
 
         return $html;
     }
+
+    private function mail_setup(){
+      //<SF>
+      //LÉTREHOZVA: 2020-06-21 <br/>
+      //SZERZÓ: AX07057 <br/>
+      //LEÍRÁS: Set up the app mailer, to be ready for mail sending.<br/>
+      // PARAMÉTEREK:
+      //×-
+      // @-- @param = ... -@
+      //-×
+      //MÓDOSTÁSOK:
+      //×-
+      // @-- ... -@
+      //-×
+      //</SF>
+
+      $this->mailer = new PHPMailer();
+      $this->mailer->isHTML(true);
+		  $this->mailer->CharSet='UTF-8';
+      $this->mailer->setFrom('WRKFLWPostaMester@sajatszerver.com','HAL Kft WORKFLOW PostaMester');
+
+    }
+
+    private function genrt_AppID(){
+      //<SF>
+      //LÉTREHOZVA: 2020-06-21 <br/>
+      //SZERZÓ: AX07057 <br/>
+      //LEÍRÁS: Egy random APP ID sztring generálása csak teszteléshez. <br/>
+      // PARAMÉTEREK:
+      //×-
+      // @-- @param = ... -@
+      //-×
+      //MÓDOSTÁSOK:
+      //×-
+      // @-- ... -@
+      //-×
+      //</SF>
+
+      $appId = '';
+      $appId = 'BAREBONE_02_'.date('Y_m_d');
+      $chars = '0123456789abcdefghikklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ';
+      for($ix1=0;$ix1<24;$ix1++){
+        $appId .= $chars[rand(0,strlen($chars)-1)];
+      }
+
+      $this->instncID = substr(strtoupper(hash('sha3-512',$appId)),0,16);
+
+    }
+
 
 }
 

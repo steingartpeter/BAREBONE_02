@@ -1,5 +1,6 @@
 body{
-    background: linear-gradient(#CDCDCD, #050505);
+	background: linear-gradient(#CDCDCD, #050505);
+	overflow: auto;
 }
 @media (min-width:1200px){.container{
 	width:1170px;
@@ -143,6 +144,9 @@ span.kiemelt{
 }
 .base-form-01 input[type=text], .base-form-01 input[type=password]{
 	max-width:255px;
+}
+p{
+	overflow: auto;
 }
 /*
 +----------------------------------------------------------------------------------------------+

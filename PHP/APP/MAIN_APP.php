@@ -144,6 +144,303 @@ class MAIN_APP{
         return $html;
     }
 
+
+    //+------------------------------------------------------------------------------+
+    //|××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××|
+    //|¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤    GENERAL HELPER SECTION     ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤|
+    //|××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××|
+    //+------------------------------------------------------------------------------+
+
+    public function getCode128String($rawString){
+      //<SF>
+      // LÉTREHOZÁS: 2020-03-16 <br>
+      // SZERZŐ: AX07057<br>
+      // A függvény egy bemenő stringre egy váalszstringet generál, ami rendelkezik a
+      // CODE128B vonalkód ellenőrzőkarakterével!.<br>
+      // PARAMÉTEREK:
+      //×-
+      // @-- @rawString = a nyers szöveg -@
+      //-×
+      //MÓDOSTÁSOK:
+      //×-
+      // @-- ... -@
+      //-×
+      //</SF>
+
+  
+      //<nn>
+      //A kezdő és zárókarakterek speciálisak. Ezek nélkül is lehet vonalkódot geenrálni, 
+      //de azt nem ismeri fel a mi vonalkódolvasónk.
+      //</nn>
+      $begChr = "Ì";
+      $endChr = "Î";
+      $chkDig = 104;
+
+      //<nn>
+      //Egy for ciklussal végiglépkedve a karakreteken számolgatjuk az ellenőrzőösszeget
+      //mert ebből számolódik az utolsó előtti karakter.
+      //</nn>
+      for($i=0;$i<strlen($rawString);$i++){
+        $kar = substr($rawString,$i, 1);
+        $karVal = ord($kar)-32;
+        $chkDig += ($i+1) * $karVal;
+      }
+      
+      //<nn>
+      //Ha megvan az ellenőrzőösszeg kiszámítjuk vele a karaktert, és beletesszük az
+      //eredménystringbe.
+      //</nn>
+      $chkDig = $chkDig % 103;
+      $kar = chr($chkDig+32);
+      return $begChr . $rawString . $kar . $endChr;
+    }
+
+    public function get_hungr_dayname($dn){
+      //<SF>
+      // LÉTREHOZÁS: 2019-10-17<br>
+      // SZERZŐ: AX07057<br>
+      // Egy egyszerű kis függvény, ami a beküldött angol napnévre visszaadja a magyar megfeleleőt.<br>
+      // PARAMÉTEREK:
+      //×-
+      // @-- @param = ... -@
+      //-×
+      //MÓDOSTÁSOK:
+      //×-
+      // @-- ... -@
+      //-×
+      //</SF>
+      
+      $resp = 'Ismeretlen nap';
+
+      switch (strtoupper($dn)) {
+          case 'MONDAY':
+              $resp = 'Hétfő';
+              break;
+          case 'TUESDAY':
+              $resp = 'Kedd';
+              break;
+          case 'WEDNESDAY':
+              $resp = 'Szerda';
+              break;
+          case 'THURSDAY':
+              $resp = 'Csütrötök';
+              break;
+          case 'FRIDAY':
+              $resp = 'Péntek';
+              break;
+          case 'SATURDAY':
+              $resp = 'Szombat';
+              break;
+          case 'SUNDAY':
+              $resp = 'Vasárnap';
+              break;
+          default:
+              # code...
+              break;
+      }
+
+      return $resp;
+    }
+
+    public function cnvrt_secndsNr_to_time($sec){
+        //<SF>
+        // LÉTREHOZÁS: 2019-02-13<br>
+        // SZERZŐ: AX07057<br>
+        // Másodperc érték konvertálása óra:perc:másodperc sztringgé.<br>
+        // PARAMÉTEREK:
+        //×-
+        // @-- $sec = a másodpercek -> egy szám -@
+        //-×
+        //MÓDOSTÁSOK:
+        //×-
+        // @-- 2019-02-14:<br>
+        // Úgy tűnik a negatív időre nem gondoltam ...:(
+        // -@
+        //-×
+        //</SF>
+
+        $res = "";
+        $negFlag = $sec < 0;
+        $sec = abs($sec);
+        //<nn>
+        // Egynként kizámoljuk az összetevőket a számból:
+        // - az órákat
+        // - a perceket
+        // - a másodperceket
+        //</nn>
+        $hrs = floor($sec / 3600);
+        $mins = floor(($sec - ($hrs*3600))/60);
+        $secs = $sec - ($mins*60) - ($hrs*3600);
+        
+        //<nn>
+        // Hogy a formátumot biztosítsuk, megcsináljuk a 0-val való fektöltést, ahol kell.
+        //</nn>
+        if($hrs < 10){
+            $hrs = '0'.$hrs;
+        }
+        if($mins < 10){
+            $mins = '0'.$mins;
+        }
+        if($secs < 10){
+            $secs = '0'.$secs;
+        }
+
+        //<nn>
+        // Az elemekből összerakjuk az eeredménystringet.
+        //</nn>
+        if($negFlag){
+            $res = '-'.$hrs.":".$mins.":".$secs;
+        }else{
+            $res = $hrs.":".$mins.":".$secs;
+        }
+        
+
+        //<nn>
+        // Visszaadjuk az eredményt.
+        //</nn>
+        return $res;
+    }
+
+    public function cnvrt_timeStr_toSeconds($t){
+        //<SF>
+        // LÉTREHOZÁS: 2019-02-13<br>
+        // SZERZŐ: AX07057<br>
+        // Egy time string átváltása másodpercekre.<br>
+        // PARAMÉTEREK:
+        //×-
+        // @-- $t = az időt reprezentáló sztring -@
+        //-×
+        //MÓDOSTÁSOK:
+        //×-
+        // @-- ... -@
+        //-×
+        //</SF>
+
+        //<nn>
+        // Deklaráljuk az eredményváltozót.
+        //</nn>
+        $res = -1;
+
+        //<nn>
+        //A beküldött paramétert (00:00, vagy 00:00:00 formátumú lehet) egy tömbbe tesszük.
+        //</nn>
+        $tmb = explode(":",$t);
+
+        if(sizeof($tmb) == 2){
+            $res = $tmb[0] * 3600;
+            $res += $tmb[1] * 60;
+        }elseif(sizeof($tmb) == 3){
+            $res = $tmb[0] * 3600;
+            $res += $tmb[1] * 60;
+            $res += $tmb[2];
+        }else{
+            echo '<p>======================================<br> GOND VAN:<pre>';
+            print_r($tmb);
+            echo '</pre>================================================<br></p>';
+            echo '<p class="ERRMsg"> Ez a függvény csak óó:pp, vagy óó:pp:mm formátumú adatot tud kezelni!</p>';
+        }
+
+        return $res;
+
+    }
+
+    public function cnvrt_number_to_currency($nr, $crncy="", $decSep="",$thsndSep="", $nrOfDcmls=""){
+        //<SF>
+        //LÉTREHOZVA: 2020-01-16 <br/>
+        //SZERZÓ: AX07057 <br/>
+        //LEÍRÁS: Egy szám->szöveg átalakító, hogy ne szívjunk mindig az értékek átalakításával. <br/>
+        // PARAMÉTEREK:
+        //×-
+        // @-- @nr = Amiből a szöveget csináljuk -@
+        //-×
+        //MÓDOSTÁSOK:
+        //×-
+        // @-- ... -@
+        //-×
+        //</SF>
+
+        $resp = "";
+        $orgNr = $nr;
+
+        //<nn>
+        // Alapértelmezett értékek beállítása
+        //</nn>
+        if($crncy == ""){
+            $crncy = 'Ft';
+        }
+        if($decSep == ""){
+            $decSep = '.';
+        }
+        if($thsndSep == ""){
+            $thsndSep = ' ';
+        }
+        if($nrOfDcmls == ""){
+            $nrOfDcmls = 0;
+        }
+
+        //<nn>
+        // Milliárdok, ha vannak:
+        //</nn>
+        $mrds = floor($nr/1000000000);
+        if($mrds > 0){
+            $resp .= $mrds . $thsndSep;
+            $nr -= ($mrds * 1000000000); 
+        }
+        
+        //<nn>
+        // Milliók, ha vannak:
+        //</nn>
+        $mlns = floor($nr/1000000);
+        if($mlns > 0){
+            if($resp != ''){
+                $resp .= str_pad($mlns,3,"0",STR_PAD_LEFT) . $thsndSep;
+            }else{
+                $resp .= $mlns . $thsndSep;
+            }
+            $nr -= ($mlns * 1000000);
+        }
+
+        //<nn>
+        // Ezresek, ha vannak:
+        //</nn>
+        $thsnds = floor($nr/1000);
+        if($thsnds > 0){
+            if($resp != ''){
+                $resp .= str_pad($thsnds,3,"0",STR_PAD_LEFT) . $thsndSep;
+            }else{
+                $resp .= $thsnds . $thsndSep;
+            }
+            $nr -= ($thsnds * 1000);
+        }
+        
+        //<nn>
+        // Egyesek:
+        //</nn>
+        $nr = $nr%1000;
+        if($resp != ''){
+            $resp .= str_pad($nr,3,"0",STR_PAD_LEFT);
+        }else{
+            $resp = $nr;
+        }
+
+        //<nn>
+        // A tizedes jegyek:
+        //</nn>
+        if($nrOfDcmls > 0){
+            $dcmls = $orgNr - floor($orgNr);
+            //echo "<p>\$orgNr - floor(\$orgNr) => " . $dcmls .'</p>';
+            $resp .= $decSep;
+            $dcmls *= pow(10,$nrOfDcmls);
+            $dcmls = floor($dcmls);
+            //echo "<p>\$dcmls *= floor(pow(10,\$nrOfDcmls)) => " . $dcmls .'</p>';
+            $resp .= str_pad($dcmls,$nrOfDcmls,"0",STR_PAD_LEFT);
+        }
+        
+
+        return $resp . ' ' . $crncy;
+    }
+
+
     //+------------------------------------------------------------------------------+
     //|××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××|
     //|¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤       PRIVATE SECTION         ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤|

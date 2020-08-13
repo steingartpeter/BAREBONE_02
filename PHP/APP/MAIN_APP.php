@@ -634,12 +634,12 @@ class MAIN_APP{
                 </div>
             <!-- Copyright -->
             </div>
-            <div id="modalWndw" class="modal-base" title="Modális ablak OK?">
+            <!-- <div id="modalWndw" class="modal-base" title="Modális ablak OK?">
                 <p>
                     <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
                     Modális ablak üzenethez.
                 </p>
-            </div>
+            </div> --!>
             <div id="bsc-toolTip">
                 
             </div>
